@@ -1,4 +1,3 @@
-@ignore
 Feature: user edit todo
 
   Background: the user wants to edit todo

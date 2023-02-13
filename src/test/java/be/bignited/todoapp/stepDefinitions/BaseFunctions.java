@@ -11,6 +11,7 @@ import java.util.Properties;
 import java.util.logging.Logger;
 
 public abstract class BaseFunctions {
+    protected int todoId;
     private final Logger logger = Logger.getLogger(BaseFunctions.class.getName());
     protected static RequestSpecification request;
     protected static Response response;

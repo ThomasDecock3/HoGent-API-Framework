@@ -14,6 +14,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class CompleteTodoStepDef extends BaseFunctions {
+
     private int todoId;
     private final Logger logger = Logger.getLogger(CompleteTodoStepDef.class.getName());
     @When("the user wants to set todo as complete")
@@ -68,15 +69,6 @@ public class CompleteTodoStepDef extends BaseFunctions {
             logger.warning("All todo's are incomplete");
     }
 
-    @Given("todo not exist")
-    public void todoNotExist() {
-        response = request.when().get();
-        result = response.body().as(TodoDto[].class);
-        Arrays.stream(result)
-                .max(Comparator.comparing(TodoDto::todoId))
-                .ifPresent(todoDto -> todoId = todoDto.todoId() + 1);
-    }
-
     @Then("the user get an error message telling that todo not found")
     public void theUserGetAnErrorMessageTellingThatTodoNotFound() {
         if (result.length > 0) {
@@ -85,5 +77,14 @@ public class CompleteTodoStepDef extends BaseFunctions {
         }
         else
             logger.warning("All todo's are incomplete");
+    }
+
+    @Given("todo not exist")
+    public void todoNotExist() {
+        response = request.when().get();
+        result = response.body().as(TodoDto[].class);
+        Arrays.stream(result)
+                .max(Comparator.comparing(TodoDto::todoId))
+                .ifPresent(todoDto -> todoId = todoDto.todoId() + 1);
     }
 }
